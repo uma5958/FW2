@@ -68,15 +68,15 @@ import com.github.javafaker.Faker;
 
 
 public class ActionUtil {
-	
+
 	//================ Action Methods Set 1 =================
-	
+
 	public static void createNode(String text) throws Exception {
 		tlExtentTestNode.remove();
 		ExtentTest node = tlExtentTest.get().createNode(text);
 		tlExtentTestNode.set(node);
 	}
-	
+
 	public static void log(String text) {
 		tlExtentTestNode.get().log(Status.PASS, text);
 		Reporter.log(text, true);
@@ -141,7 +141,7 @@ public class ActionUtil {
 
 	public static void waitForEitherOfElementToBeDisplayed(String element1Name, By element1, String element2Name, By element2, long timeOutInSeconds) {
 		log("Waiting for either of the elements: "+element1Name
-					+" (or) "+element2Name+" to be displayed for maximum "+timeOutInSeconds+" Seconds");
+				+" (or) "+element2Name+" to be displayed for maximum "+timeOutInSeconds+" Seconds");
 		try {
 			WebDriverWait wait = new WebDriverWait(getDriver(), timeOutInSeconds);
 			wait.until(ExpectedConditions.or(
@@ -694,15 +694,21 @@ public class ActionUtil {
 			waitForElementPresent(fromElementName, (By) fromWebElementAttr);
 			WebElement ele1 = getDriver().findElement((By)fromWebElementAttr);
 			WebElement ele2 = getDriver().findElement((By)toWebElementAttr);
-			builder.clickAndHold(ele1).moveToElement(ele2).perform();
-			Thread.sleep(2000);
-			builder.release(ele2).build().perform();
+			Action dragAndDrop = builder.clickAndHold(ele1)
+					.moveByOffset(-1, -1)
+					.moveToElement(ele2)
+					.release(ele2)
+					.build();
+			dragAndDrop.perform();
 		} else {
 			WebElement ele1 = ((WebElement)fromWebElementAttr);
 			WebElement ele2 = ((WebElement)toWebElementAttr);
-			builder.clickAndHold(ele1).moveToElement(ele2).perform();
-			Thread.sleep(2000);
-			builder.release(ele2).build().perform();
+			Action dragAndDrop = builder.clickAndHold(ele1)
+					.moveByOffset(-1, -1)
+					.moveToElement(ele2)
+					.release(ele2)
+					.build();
+			dragAndDrop.perform();
 		}
 	}
 
@@ -1364,15 +1370,15 @@ public class ActionUtil {
 		JavascriptExecutor jse = (JavascriptExecutor)getDriver();
 		jse.executeScript("document.body.style.zoom = '"+zoom+"%';");
 	}
-	
+
 	public static void openNewBlankTab() {
 		((JavascriptExecutor) getDriver()).executeScript("window.open()");
 	}
-	
+
 	public static void openNewTabAndNavigateToGivenUrl(String url) {
 		((JavascriptExecutor) getDriver()).executeScript("window.open('"+url+"')");
 	}
-	
+
 	public static void openNewTabAndNavigateToGivenUrl2(String url) {
 		getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");// open in new tab
 		getDriver().get(url);
@@ -1840,15 +1846,21 @@ public class ActionUtil {
 			waitForElementPresent(fromElementName, (By) fromWebElementAttr);
 			WebElement ele1 = getDriver().findElement((By)fromWebElementAttr);
 			WebElement ele2 = getDriver().findElement((By)toWebElementAttr);
-			builder.clickAndHold(ele1).moveToElement(ele2).perform();
-			Thread.sleep(2000);
-			builder.release(ele2).build().perform();
+			Action dragAndDrop = builder.clickAndHold(ele1)
+					.moveByOffset(-1, -1)
+					.moveToElement(ele2)
+					.release(ele2)
+					.build();
+			dragAndDrop.perform();
 		} else {
 			WebElement ele1 = ((WebElement)fromWebElementAttr);
 			WebElement ele2 = ((WebElement)toWebElementAttr);
-			builder.clickAndHold(ele1).moveToElement(ele2).perform();
-			Thread.sleep(2000);
-			builder.release(ele2).build().perform();
+			Action dragAndDrop = builder.clickAndHold(ele1)
+					.moveByOffset(-1, -1)
+					.moveToElement(ele2)
+					.release(ele2)
+					.build();
+			dragAndDrop.perform();
 		}
 		waitForAjax(getDriver());
 	}
